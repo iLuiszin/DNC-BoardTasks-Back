@@ -8,6 +8,7 @@ const swaggerOptions = {
   customCssUrl: '/swagger-ui.css',
 }
 const routes = require('./src/routes')
+const authDocProduction = require('./src/middlewares/authDoc')
 
 const app = express()
 require('dotenv').config()
@@ -27,7 +28,12 @@ if (process.env.NODE_ENV !== 'test') {
     /* #swagger.ignore = true */
     res.redirect('/doc')
   })
-  app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile, swaggerOptions))
+  app.use(
+    '/doc',
+    authDocProduction,
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerFile, swaggerOptions)
+  )
 }
 
 // User Routes
