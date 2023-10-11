@@ -3,6 +3,7 @@ env:
   NODE_ENV: production
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
 on:
   push:
     branches:
@@ -16,7 +17,7 @@ jobs:
       - name: Pegar código do Repositório
         uses: actions/checkout@v3
 
-      - name: Installando pacotes do npm
+      - name: Instalando pacotes do npm
         run: npm install
 
       - name: Gerando documentação do swagger.json
@@ -48,7 +49,7 @@ jobs:
         with:
           name: artefato
 
-      - name: Installando pacotes do npm
+      - name: Instalando pacotes do npm
         run: npm install
 
       - name: Arquivos e pastas do artefato

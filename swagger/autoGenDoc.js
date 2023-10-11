@@ -10,7 +10,7 @@ const endpointsFiles = ['../index.js', '../src/routes.js']
 let doc = {
   info: {
     version: '1.0.0',
-    title: 'API de BoardTasks',
+    title: 'API do BoardTasks',
     description: 'Documentação da API do BoardTasks.',
   },
   servers: [
