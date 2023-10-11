@@ -10,7 +10,6 @@ const authDocProduction = require('./src/middlewares/authDoc')
 const app = express()
 require('dotenv').config()
 
-// Express configuration
 app.use(cors())
 app.use(logger('dev'))
 app.use(express.json())
@@ -18,12 +17,10 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-// Starting swagger
 if (process.env.NODE_ENV !== 'test') {
   const swaggerFile = require('./swagger/swagger_output.json')
   app.get('/', (req, res) => {
-    /* #swagger.ignore = true */
-    res.redirect('/doc')
+    /* #swagger.ignore = true */ res.redirect('/doc')
   })
   app.use(
     '/doc',
@@ -33,7 +30,6 @@ if (process.env.NODE_ENV !== 'test') {
   )
 }
 
-// User Routes
 routes(app)
 
 if (process.env.NODE_ENV !== 'test') {
