@@ -55,10 +55,10 @@ jobs:
         run: ls
 
       - name: Instalando CLI da Vercel
-        run: npm i -g vercel@latest
+        run: npm install --global vercel@latest
 
       - name: Buscando informações de ambiente no Vercel
-        run: vercel pull --yes --enviroment=production --token=${{ secrets.VERCEL_TOKEN }}º
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Buildando artefatos do projeto
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
