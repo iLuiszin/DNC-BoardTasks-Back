@@ -19,7 +19,7 @@ let doc = {
       description: 'Servidor local',
     },
     {
-      url: 'https://boardtasks.vercel.app',
+      url: 'https://dnc-board-tasks-back-three.vercel.app/',
       description: 'Servidor de produção',
     },
   ],
