@@ -4,8 +4,13 @@ const swaggerAutogen = require('swagger-autogen')({
   language: 'pt-BR',
 })
 
-const outputFile = './swagger_output.json'
-const endpointsFiles = ['../index.js', '../src/routes.js']
+let outputFile = './swagger_output.json'
+let endpointsFiles = ['../index.js', '../src/routes.js']
+
+// if(String(process.env.OS).toLocaleLowerCase().includes("windows")){
+//     outputFile = './swagger/swagger_output.json';
+//     endpointsFiles = ['./index.js', './src/routes.js'];
+// }
 
 let doc = {
   info: {
@@ -15,12 +20,12 @@ let doc = {
   },
   servers: [
     {
-      url: 'http://localhost:4000',
-      description: 'Servidor local',
+      url: 'http://localhost:4000/',
+      description: 'Servidor localhost.',
     },
     {
       url: 'https://dnc-board-tasks-back-three.vercel.app/',
-      description: 'Servidor de produção',
+      description: 'Servidor de produção.',
     },
   ],
   consumes: ['application/json'],
@@ -29,7 +34,7 @@ let doc = {
 
 swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
   console.log(
-    'Documentação do swagger gerada encontra-se no arquivo em: ' + outputFile
+    'Documentação do Swagger gerada encontra-se no arquivo em: ' + outputFile
   )
   if (process.env.NODE_ENV !== 'production') {
     require('../index.js')
