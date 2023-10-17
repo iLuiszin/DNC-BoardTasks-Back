@@ -33,6 +33,7 @@ let doc = {
   components: {
     schemas: {
       User: mongooseToSwagger(require('../src/models/User.js')),
+      Task: mongooseToSwagger(require('../src/models/Task.js')),
     },
   },
 }
