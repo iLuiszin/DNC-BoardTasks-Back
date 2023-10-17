@@ -30,6 +30,11 @@ let doc = {
   ],
   consumes: ['application/json'],
   produces: ['application/json'],
+  components: {
+    schemas: {
+      User: mongooseToSwagger(require('../src/models/User.js')),
+    },
+  },
 }
 
 swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
