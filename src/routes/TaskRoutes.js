@@ -7,5 +7,6 @@ const router = express.Router()
 router.post('/create', authUser, connectDB, TaskController.create)
 
 router.put('/update/:id', authUser, connectDB, TaskController.update)
+router.get('/list', authUser, connectDB, TaskController.getAll)
 
 module.exports = router

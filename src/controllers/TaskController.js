@@ -32,13 +32,13 @@ module.exports = class TaskController {
   static async update(req, res) {
     // #swagger.tags = ['Task']
     try {
-      const idTarefa = req.params.id
+      const idTask = req.params.id
       const { position, title, description, status, deliveryDate } = req.body
 
       const loggedUser = req.userJwt.id
 
       const taskExists = await Task.findOne({
-        _id: idTarefa,
+        _id: idTask,
         userCreator: loggedUser,
       })
 
@@ -50,7 +50,7 @@ module.exports = class TaskController {
       }
 
       const updatedTask = await Task.updateOne(
-        { _id: idTarefa },
+        { _id: idTask },
         {
           position,
           title,
@@ -61,16 +61,37 @@ module.exports = class TaskController {
       )
 
       if (updatedTask?.modifiedCount > 0) {
-        const taskData = await Task.findOne({ _id: idTarefa }).populate(
+        const taskData = await Task.findOne({ _id: idTask }).populate(
           'userCreator'
         )
 
-        return res.status(201).json({
+        return res.status(200).json({
           status: 'OK',
           message: 'Task updated successfully!',
           answer: taskData,
         })
       }
+    } catch (error) {
+      console.log(error)
+      return errorHandler(res, error)
+    }
+  }
+
+  static async getAll(req, res) {
+    // #swagger.tags = ['Task']
+    // #swagger.description = "Endpoint to get all tasks from logged user."
+    try {
+      const idUser = req.userJwt.id
+
+      const tasks = await Task.find({ userCreator: idUser }).populate(
+        'userCreator'
+      )
+
+      return res.status(200).json({
+        status: 'OK',
+        message: 'Tasks found successfully!',
+        answer: tasks,
+      })
     } catch (error) {
       console.log(error)
       return errorHandler(res, error)
