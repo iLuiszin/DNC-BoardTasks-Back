@@ -8,5 +8,6 @@ router.post('/create', authUser, connectDB, TaskController.create)
 
 router.put('/update/:id', authUser, connectDB, TaskController.update)
 router.get('/list', authUser, connectDB, TaskController.getAll)
+router.delete('/delete/:id', authUser, connectDB, TaskController.delete)
 
 module.exports = router

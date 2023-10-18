@@ -19,7 +19,7 @@ module.exports = class TaskController {
       })
 
       return res.status(201).json({
-        status: 'OK',
+        status: 'Created',
         message: 'Task created successfully!',
         answer: BDresponse,
       })
@@ -91,6 +91,34 @@ module.exports = class TaskController {
         status: 'OK',
         message: 'Tasks found successfully!',
         answer: tasks,
+      })
+    } catch (error) {
+      console.log(error)
+      return errorHandler(res, error)
+    }
+  }
+
+  static async delete(req, res) {
+    // #swagger.tags = ['Task']
+    try {
+      const idTask = req.params.id
+      const idUser = req.userJwt.id
+
+      const task = await Task.findOneAndDelete({
+        _id: idTask,
+        userCreator: idUser,
+      })
+
+      if (!task) {
+        return errorHandler(
+          res,
+          'Error: Task not found or you are not the creator!'
+        )
+      }
+
+      return res.status(200).json({
+        status: 'OK',
+        message: 'Task deleted successfully!',
       })
     } catch (error) {
       console.log(error)
