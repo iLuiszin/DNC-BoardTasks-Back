@@ -5,6 +5,7 @@ const authUser = require('../middlewares/authUser')
 const router = express.Router()
 
 router.post('/create', authUser, connectDB, TaskController.create)
-router.post('/login', connectDB)
+
+router.put('/update/:id', authUser, connectDB, TaskController.update)
 
 module.exports = router

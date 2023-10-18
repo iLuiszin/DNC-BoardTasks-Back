@@ -5,12 +5,10 @@ const jwt = require('jsonwebtoken')
 
 module.exports = class UserController {
   static async create(req, res) {
+    // #swagger.tags = ['User']
     try {
-      // #swagger.tags = ['User']
       const { name, email, password } = req.body
       const passwordHash = await bcrypt.hash(password, 10)
-
-      const userExists = await User.findOne({ email: email })
 
       const BDresponse = await User.create({
         name,
@@ -33,8 +31,8 @@ module.exports = class UserController {
   }
 
   static async login(req, res) {
+    // #swagger.tags = ['User']
     try {
-      // #swagger.tags = ['User']
       const { email, password } = req.body
 
       const user = await User.findOne({ email: email }).select('+password')
