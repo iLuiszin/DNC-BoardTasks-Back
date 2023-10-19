@@ -1,6 +1,6 @@
 # DNC-BoardTasks-Back
 
-Projeto em React do BoardTasks Back-End feito para o curso de NodeJS na escola DNC
+Projeto em NodeJS do BoardTasks Back-End feito para o curso de NodeJS na escola DNC
 
 ---
 
